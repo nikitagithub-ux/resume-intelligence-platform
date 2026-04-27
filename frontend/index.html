@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeIQ — Know Your Fit</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0a0f;
+    --surface:   #111118;
+    --card:      #16161f;
+    --border:    #2a2a3a;
+    --accent1:   #7c3aed;
+    --accent2:   #06b6d4;
+    --accent3:   #f59e0b;
+    --success:   #10b981;
+    --danger:    #ef4444;
+    --text:      #f1f0f7;
+    --muted:     #6b6b8a;
+    --grad:      linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background mesh ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(124,58,237,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(6,182,212,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 48px 0 32px;
+    text-align: center;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .logo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--grad);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.7; }
+  }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 17px;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--grad);
+    opacity: 0.6;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent1);
+  }
+
+  /* ── Form elements ── */
+  .field { margin-bottom: 20px; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+
+  input[type="text"]:focus, select:focus {
+    border-color: var(--accent1);
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+  }
+
+  input[type="text"]::placeholder { color: var(--muted); }
+
+  select option {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  /* ── Domain search ── */
+  .domain-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .domain-chip {
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .domain-chip:hover { border-color: var(--accent1); color: var(--text); }
+
+  .domain-chip.active {
+    background: rgba(124,58,237,0.2);
+    border-color: var(--accent1);
+    color: var(--text);
+  }
+
+  /* ── File upload ── */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--accent1);
+    background: rgba(124,58,237,0.05);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .upload-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .upload-hint {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .upload-filename {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  /* ── Submit button ── */
+  .btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    background: var(--grad);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+  .btn:active:not(:disabled) { transform: translateY(0); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn .btn-text { position: relative; z-index: 1; }
+
+  /* ── Loading ── */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 48px;
+  }
+
+  .loading.active { display: block; }
+
+  .spinner {
+    width: 48px; height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent1);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-size: 15px;
+    color: var(--muted);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* ── Results ── */
+  #results { display: none; }
+  #results.active { display: block; }
+
+  /* ── Score card ── */
+  .score-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .score-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--grad);
+  }
+
+  .score-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .score-ring {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 24px;
+  }
+
+  .score-ring svg { transform: rotate(-90deg); }
+
+  .score-ring-bg { stroke: var(--border); fill: none; stroke-width: 8; }
+  .score-ring-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke: url(#scoreGrad);
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .score-number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .score-pct {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .score-unit {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .verdict {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .verdict.good { color: var(--success); }
+  .verdict.bad { color: var(--danger); }
+
+  .verdict-sub {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ── Metrics row ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .metric {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .metric-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .metric-bar {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border);
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .metric-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--grad);
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 0%;
+  }
+
+  /* ── Skills ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .skills-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .skills-box-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .skills-box-title.matched { color: var(--success); }
+  .skills-box-title.missing { color: var(--danger); }
+
+  .skill-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 3px;
+  }
+
+  .skill-tag.matched {
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--success);
+  }
+
+  .skill-tag.missing {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--danger);
+  }
+
+  .skill-tag.neutral {
+    background: rgba(107,107,138,0.15);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* ── Profile comparison ── */
+  .profile-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .profile-sim-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--border);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .profile-sim-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--grad);
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 0%;
+  }
+
+  .profile-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .profile-stat {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .profile-stat strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── Feedback ── */
+  .feedback-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .feedback-summary {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 24px;
+    padding: 16px;
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--accent1);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .feedback-section { margin-bottom: 20px; }
+
+  .feedback-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .feedback-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .feedback-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .dot.green { background: var(--success); }
+  .dot.amber { background: var(--accent3); }
+  .dot.cyan  { background: var(--accent2); }
+
+  /* ── Reset button ── */
+  .btn-reset {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 48px;
+  }
+
+  .btn-reset:hover {
+    border-color: var(--accent1);
+    color: var(--text);
+  }
+
+  /* ── Error ── */
+  .error-box {
+    display: none;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: var(--danger);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .error-box.active { display: block; }
+
+  /* ── Seniority badge ── */
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .badge.fit { background: rgba(16,185,129,0.15); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+  .badge.overqualified { background: rgba(245,158,11,0.15); color: var(--accent3); border: 1px solid rgba(245,158,11,0.3); }
+  .badge.underqualified { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .card { padding: 24px; }
+    .score-card { padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span class="logo-text">ResumeIQ</span>
+    </div>
+    <h1>Know Your <span>Hiring Fit</span></h1>
+    <p class="subtitle">Upload your resume, pick a role, and find out exactly how likely you are to get shortlisted — and why.</p>
+  </header>
+
+  <!-- Form -->
+  <div id="formSection">
+
+    <!-- Job selection -->
+    <div class="card">
+      <div class="card-title">Step 1 — Select a Job Role</div>
+
+      <div class="field">
+        <label>Filter by Domain</label>
+        <div class="domain-grid" id="domainChips"></div>
+      </div>
+
+      <div class="field">
+        <label>Job Title</label>
+        <select id="jobSelect">
+          <option value="">— Select a domain first —</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Resume upload -->
+    <div class="card">
+      <div class="card-title">Step 2 — Upload Your Resume</div>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="resumeFile" accept=".pdf,.docx">
+        <span class="upload-icon">📄</span>
+        <div class="upload-label">Drop your resume here or click to browse</div>
+        <div class="upload-hint">PDF or DOCX — max 10MB</div>
+        <div class="upload-filename" id="uploadFilename"></div>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div class="error-box" id="errorBox"></div>
+
+    <!-- Submit -->
+    <button class="btn" id="analyzeBtn" disabled>
+      <span class="btn-text">Analyse My Resume</span>
+    </button>
+
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Analysing your resume...</div>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+
+    <!-- Score -->
+    <div class="score-card">
+      <div class="score-label">Shortlisting Likelihood</div>
+      <div class="score-ring">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <defs>
+            <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <circle class="score-ring-bg" cx="80" cy="80" r="68"/>
+          <circle class="score-ring-fill" id="scoreRingFill" cx="80" cy="80" r="68"
+            stroke-dasharray="427" stroke-dashoffset="427"/>
+        </svg>
+        <div class="score-number">
+          <div class="score-pct" id="scorePct">0%</div>
+          <div class="score-unit">match</div>
+        </div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+      <div class="verdict-sub" id="verdictSub"></div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-val" id="metricSkill">—</div>
+        <div class="metric-label">Skill Overlap</div>
+        <div class="metric-bar"><div class="metric-bar-fill" id="barSkill"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" id="metricExp">—</div>
+        <div class="metric-label">Experience Fit</div>
+        <div class="metric-bar"><div class="metric-bar-fill" id="barExp"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" id="metricDomain">—</div>
+        <div class="metric-label">Domain Alignment</div>
+        <div class="metric-bar"><div class="metric-bar-fill" id="barDomain"></div></div>
+      </div>
+    </div>
+
+    <!-- Seniority + experience info -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">Experience Breakdown</div>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Your Experience</div>
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;" id="expYours">—</div>
+        </div>
+        <div style="color:var(--border);font-size:20px;">→</div>
+        <div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Role Requires</div>
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;" id="expRequired">—</div>
+        </div>
+        <div style="margin-left:auto;">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">Seniority Fit</div>
+          <div id="seniorityBadge"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="skills-grid">
+      <div class="skills-box">
+        <div class="skills-box-title matched">✓ Matched Skills</div>
+        <div id="matchedSkills"></div>
+      </div>
+      <div class="skills-box">
+        <div class="skills-box-title missing">✗ Missing Skills</div>
+        <div id="missingSkills"></div>
+      </div>
+    </div>
+
+    <!-- Profile comparison -->
+    <div class="profile-card">
+      <div class="card-title" style="margin-bottom:8px;">Compared to Successful Candidates</div>
+      <div style="font-size:13px;color:var(--muted);" id="profileMeta"></div>
+      <div class="profile-sim-bar">
+        <div class="profile-sim-fill" id="profileSimFill"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);">
+        <span>Profile Similarity</span>
+        <span id="profileSimPct" style="color:var(--text);font-weight:600;"></span>
+      </div>
+      <div class="profile-stats" id="profileStats"></div>
+      <div style="margin-top:16px;" id="skillsToAdd"></div>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback-card">
+      <div class="card-title">AI Feedback</div>
+      <div class="feedback-summary" id="feedbackSummary"></div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">Strengths</div>
+        <div id="feedbackStrengths"></div>
+      </div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">Improvements</div>
+        <div id="feedbackImprovements"></div>
+      </div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">Quick Win This Week</div>
+        <div id="feedbackQuickWins"></div>
+      </div>
+    </div>
+
+    <button class="btn-reset" id="resetBtn">← Analyse Another Resume</button>
+
+  </div>
+
+</div>
+
+<script>
+const API = 'http://127.0.0.1:8000';
+
+const DOMAIN_LABELS = {
+  backend: 'Backend Engineering',
+  frontend: 'Frontend Development',
+  fullstack: 'Full Stack',
+  ml: 'Machine Learning',
+  data: 'Data Engineering',
+  devops: 'DevOps',
+  cloud: 'Cloud Engineering',
+  qa: 'Quality Assurance',
+  ba: 'Business Analytics',
+  security: 'Security',
+  mobile: 'Mobile Development',
+  blockchain: 'Blockchain',
+  embedded: 'Embedded Systems',
+  general: 'General Software',
+};
+
+let allJobs = [];
+let selectedJobId = null;
+let selectedFile = null;
+let activeDomain = null;
+
+// ── Init ──
+async function init() {
+  try {
+    const res = await fetch(`${API}/jobs`);
+    allJobs = await res.json();
+    renderDomainChips();
+  } catch (e) {
+    showError('Cannot connect to API. Make sure uvicorn is running on port 8000.');
+  }
+}
+
+// ── Domain chips ──
+function renderDomainChips() {
+  const domains = [...new Set(allJobs.map(j => j.domain))].sort();
+  const container = document.getElementById('domainChips');
+  container.innerHTML = '';
+  domains.forEach(d => {
+    const chip = document.createElement('button');
+    chip.className = 'domain-chip';
+    chip.textContent = DOMAIN_LABELS[d] || d;
+    chip.dataset.domain = d;
+    chip.onclick = () => selectDomain(d);
+    container.appendChild(chip);
+  });
+}
+
+function selectDomain(domain) {
+  activeDomain = domain;
+  document.querySelectorAll('.domain-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.domain === domain);
+  });
+  populateJobSelect(domain);
+}
+
+function populateJobSelect(domain) {
+  const select = document.getElementById('jobSelect');
+  const jobs = allJobs.filter(j => j.domain === domain);
+  select.innerHTML = '<option value="">— Pick a job title —</option>';
+  jobs.forEach(j => {
+    const opt = document.createElement('option');
+    opt.value = j.id;
+    opt.textContent = j.title;
+    select.appendChild(opt);
+  });
+  selectedJobId = null;
+  checkReady();
+}
+
+document.getElementById('jobSelect').addEventListener('change', e => {
+  selectedJobId = e.target.value;
+  checkReady();
+});
+
+// ── File upload ──
+const uploadZone = document.getElementById('uploadZone');
+const fileInput  = document.getElementById('resumeFile');
+
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('dragover');
+  const f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files[0]) handleFile(fileInput.files[0]);
+});
+
+function handleFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['pdf', 'docx'].includes(ext)) {
+    showError('Only PDF and DOCX files are supported.');
+    return;
+  }
+  selectedFile = file;
+  document.getElementById('uploadFilename').textContent = '✓ ' + file.name;
+  uploadZone.style.borderColor = 'var(--success)';
+  checkReady();
+}
+
+// ── Ready check ──
+function checkReady() {
+  const ready = selectedJobId && selectedFile;
+  document.getElementById('analyzeBtn').disabled = !ready;
+}
+
+// ── Submit ──
+document.getElementById('analyzeBtn').addEventListener('click', async () => {
+  hideError();
+  showLoading();
+
+  const formData = new FormData();
+  formData.append('file', selectedFile);
+  formData.append('job_id', selectedJobId);
+
+  try {
+    const res  = await fetch(`${API}/predict`, { method: 'POST', body: formData });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data.detail || 'Something went wrong. Please try again.');
+      hideLoading();
+      return;
+    }
+
+    renderResults(data);
+  } catch (e) {
+    showError('Could not reach the API. Make sure uvicorn is running.');
+    hideLoading();
+  }
+});
+
+// ── Render results ──
+function renderResults(d) {
+  hideLoading();
+  document.getElementById('formSection').style.display = 'none';
+  document.getElementById('results').classList.add('active');
+
+  // Score ring
+  const pct = d.confidence_pct;
+  const circumference = 427;
+  const offset = circumference - (pct / 100) * circumference;
+  setTimeout(() => {
+    document.getElementById('scoreRingFill').style.strokeDashoffset = offset;
+    document.getElementById('scorePct').textContent = pct.toFixed(1) + '%';
+  }, 100);
+
+  // Verdict
+  const verdictEl = document.getElementById('verdict');
+  const subEl     = document.getElementById('verdictSub');
+  if (d.prediction === 1) {
+    verdictEl.textContent = 'Likely Shortlisted';
+    verdictEl.className = 'verdict good';
+    subEl.textContent = `Strong fit for ${d.job_title}`;
+  } else {
+    verdictEl.textContent = 'Needs Improvement';
+    verdictEl.className = 'verdict bad';
+    subEl.textContent = `Some gaps to close for ${d.job_title}`;
+  }
+
+  // Metrics
+  setTimeout(() => {
+    setMetric('metricSkill', 'barSkill', d.skill_overlap, '%', true);
+    setMetric('metricExp',   'barExp',   d.experience_score, '', false);
+    setMetric('metricDomain','barDomain',d.domain_score, '', false);
+  }, 200);
+
+  // Experience
+  document.getElementById('expYours').textContent = d.resume_experience + ' yrs';
+  document.getElementById('expRequired').textContent =
+    d.profile_comparison.experience_range
+      ? `${d.profile_comparison.experience_range.min}–${d.profile_comparison.experience_range.max} yrs`
+      : '—';
+  const badge = document.getElementById('seniorityBadge');
+  badge.innerHTML = `<span class="badge ${d.seniority_fit}">${d.seniority_fit}</span>`;
+
+  // Skills
+  renderSkillTags('matchedSkills', d.matched_skills, 'matched');
+  renderSkillTags('missingSkills', d.missing_skills, 'missing');
+
+  // Profile comparison
+  const pc = d.profile_comparison;
+  document.getElementById('profileMeta').textContent =
+    `Based on ${pc.based_on_n_candidates.toLocaleString()} successful ${d.job_domain} candidates`;
+  setTimeout(() => {
+    document.getElementById('profileSimFill').style.width = (pc.profile_similarity * 100) + '%';
+  }, 300);
+  document.getElementById('profileSimPct').textContent = (pc.profile_similarity * 100).toFixed(1) + '%';
+
+  document.getElementById('profileStats').innerHTML = `
+    <div class="profile-stat">Typical experience <strong>${pc.typical_experience} yrs</strong></div>
+    <div class="profile-stat">Min viable skill overlap <strong>${(pc.min_viable_overlap * 100).toFixed(0)}%</strong></div>
+    <div class="profile-stat">Avg hiring score <strong>${(pc.avg_hiring_score * 100).toFixed(0)}%</strong></div>
+  `;
+
+  if (pc.skills_to_add && pc.skills_to_add.length > 0) {
+    document.getElementById('skillsToAdd').innerHTML =
+      '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:8px;">Top candidates in this domain also have</div>' +
+      pc.skills_to_add.map(s => `<span class="skill-tag neutral">${s}</span>`).join('');
+  }
+
+  // Feedback
+  const fb = d.feedback;
+  document.getElementById('feedbackSummary').textContent = fb.summary || '';
+
+  renderFeedbackItems('feedbackStrengths', fb.strengths || [], 'green');
+  renderFeedbackItems('feedbackImprovements', fb.improvements || [], 'amber');
+  renderFeedbackItems('feedbackQuickWins', fb.quick_wins || [], 'cyan');
+
+  // Scroll to results
+  setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+}
+
+function setMetric(valId, barId, val, suffix, isPercent) {
+  const display = isPercent ? (val * 100).toFixed(0) + '%' : (val * 100).toFixed(0) + '%';
+  document.getElementById(valId).textContent = display;
+  document.getElementById(barId).style.width = (val * 100) + '%';
+}
+
+function renderSkillTags(containerId, skills, type) {
+  const container = document.getElementById(containerId);
+  if (!skills || skills.length === 0) {
+    container.innerHTML = `<span style="font-size:13px;color:var(--muted);">${type === 'matched' ? 'None matched' : 'None missing — great!'}</span>`;
+    return;
+  }
+  container.innerHTML = skills.map(s => `<span class="skill-tag ${type}">${s}</span>`).join('');
+}
+
+function renderFeedbackItems(containerId, items, dotClass) {
+  document.getElementById(containerId).innerHTML = items.map(item =>
+    `<div class="feedback-item"><div class="dot ${dotClass}"></div><span>${item}</span></div>`
+  ).join('');
+}
+
+// ── Reset ──
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('formSection').style.display = 'block';
+  document.getElementById('jobSelect').value = '';
+  document.getElementById('uploadFilename').textContent = '';
+  document.querySelector('#uploadZone').style.borderColor = '';
+  document.querySelectorAll('.domain-chip').forEach(c => c.classList.remove('active'));
+  selectedJobId = null;
+  selectedFile  = null;
+  activeDomain  = null;
+  checkReady();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── Helpers ──
+function showLoading() {
+  document.getElementById('formSection').style.display = 'none';
+  document.getElementById('loading').classList.add('active');
+}
+
+function hideLoading() {
+  document.getElementById('loading').classList.remove('active');
+}
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  box.textContent = '⚠ ' + msg;
+  box.classList.add('active');
+  document.getElementById('formSection').style.display = 'block';
+}
+
+function hideError() {
+  document.getElementById('errorBox').classList.remove('active');
+}
+
+init();
+</script>
+</body>
+</html>

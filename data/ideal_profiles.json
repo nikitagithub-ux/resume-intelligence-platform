@@ -1,0 +1,366 @@
+{
+  "backend": {
+    "job_domain": "backend",
+    "candidate_count": 1313,
+    "avg_experience": 6.85,
+    "avg_skill_count": 22.32,
+    "avg_skill_overlap": 0.5645,
+    "avg_hiring_score": 0.5477,
+    "min_viable_overlap": 0.3333,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "java",
+      "linux",
+      "html",
+      "security",
+      "api",
+      "jira"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 8.0
+    }
+  },
+  "ml": {
+    "job_domain": "ml",
+    "candidate_count": 835,
+    "avg_experience": 5.89,
+    "avg_skill_count": 22.23,
+    "avg_skill_overlap": 0.4098,
+    "avg_hiring_score": 0.4467,
+    "min_viable_overlap": 0.0,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "java",
+      "linux",
+      "security",
+      "html",
+      "c",
+      "api"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "data": {
+    "job_domain": "data",
+    "candidate_count": 1588,
+    "avg_experience": 7.16,
+    "avg_skill_count": 17.94,
+    "avg_skill_overlap": 0.6211,
+    "avg_hiring_score": 0.5532,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "security",
+      "reporting",
+      "linux",
+      "java",
+      "html",
+      "jira"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 9.0
+    }
+  },
+  "devops": {
+    "job_domain": "devops",
+    "candidate_count": 967,
+    "avg_experience": 7.32,
+    "avg_skill_count": 22.45,
+    "avg_skill_overlap": 0.6341,
+    "avg_hiring_score": 0.5578,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "linux",
+      "security",
+      "integration",
+      "agile",
+      "java",
+      "html",
+      "jira",
+      "api"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 9.0
+    }
+  },
+  "qa": {
+    "job_domain": "qa",
+    "candidate_count": 1646,
+    "avg_experience": 7.34,
+    "avg_skill_count": 19.4,
+    "avg_skill_overlap": 0.7303,
+    "avg_hiring_score": 0.6321,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "testing",
+      "sql",
+      "integration",
+      "agile",
+      "security",
+      "java",
+      "linux",
+      "html",
+      "jira",
+      "reporting"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 9.0
+    }
+  },
+  "security": {
+    "job_domain": "security",
+    "candidate_count": 959,
+    "avg_experience": 7.21,
+    "avg_skill_count": 17.47,
+    "avg_skill_overlap": 0.5129,
+    "avg_hiring_score": 0.5003,
+    "min_viable_overlap": 0.3333,
+    "top_skills": [
+      "security",
+      "testing",
+      "sql",
+      "linux",
+      "integration",
+      "agile",
+      "html",
+      "java",
+      "c",
+      "reporting"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 8.5
+    }
+  },
+  "blockchain": {
+    "job_domain": "blockchain",
+    "candidate_count": 341,
+    "avg_experience": 6.03,
+    "avg_skill_count": 22.4,
+    "avg_skill_overlap": 0.2845,
+    "avg_hiring_score": 0.3968,
+    "min_viable_overlap": 0.0,
+    "top_skills": [
+      "testing",
+      "sql",
+      "integration",
+      "java",
+      "agile",
+      "html",
+      "security",
+      "linux",
+      "javascript",
+      "c"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "embedded": {
+    "job_domain": "embedded",
+    "candidate_count": 770,
+    "avg_experience": 6.91,
+    "avg_skill_count": 19.3,
+    "avg_skill_overlap": 0.6682,
+    "avg_hiring_score": 0.5808,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "c",
+      "sql",
+      "testing",
+      "agile",
+      "integration",
+      "linux",
+      "java",
+      "security",
+      "html",
+      "jira"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "frontend": {
+    "job_domain": "frontend",
+    "candidate_count": 981,
+    "avg_experience": 6.72,
+    "avg_skill_count": 24.36,
+    "avg_skill_overlap": 0.6755,
+    "avg_hiring_score": 0.6041,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "html",
+      "testing",
+      "java",
+      "agile",
+      "css",
+      "javascript",
+      "integration",
+      "linux",
+      "api"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "fullstack": {
+    "job_domain": "fullstack",
+    "candidate_count": 913,
+    "avg_experience": 6.53,
+    "avg_skill_count": 24.77,
+    "avg_skill_overlap": 0.6166,
+    "avg_hiring_score": 0.5825,
+    "min_viable_overlap": 0.3333,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "java",
+      "html",
+      "linux",
+      "security",
+      "api",
+      "javascript"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "ba": {
+    "job_domain": "ba",
+    "candidate_count": 1575,
+    "avg_experience": 7.39,
+    "avg_skill_count": 17.62,
+    "avg_skill_overlap": 0.6337,
+    "avg_hiring_score": 0.583,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "agile",
+      "integration",
+      "security",
+      "reporting",
+      "java",
+      "linux",
+      "jira",
+      "html"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 9.0
+    }
+  },
+  "mobile": {
+    "job_domain": "mobile",
+    "candidate_count": 479,
+    "avg_experience": 6.32,
+    "avg_skill_count": 22.05,
+    "avg_skill_overlap": 0.4238,
+    "avg_hiring_score": 0.4301,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "java",
+      "html",
+      "linux",
+      "security",
+      "api",
+      "javascript"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "general": {
+    "job_domain": "general",
+    "candidate_count": 1318,
+    "avg_experience": 6.75,
+    "avg_skill_count": 21.39,
+    "avg_skill_overlap": 0.5618,
+    "avg_hiring_score": 0.5385,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "linux",
+      "integration",
+      "agile",
+      "java",
+      "security",
+      "html",
+      "jira",
+      "c"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 3.0,
+      "max": 8.0
+    }
+  },
+  "cloud": {
+    "job_domain": "cloud",
+    "candidate_count": 390,
+    "avg_experience": 6.93,
+    "avg_skill_count": 26.83,
+    "avg_skill_overlap": 0.5,
+    "avg_hiring_score": 0.4987,
+    "min_viable_overlap": 0.5,
+    "top_skills": [
+      "sql",
+      "testing",
+      "integration",
+      "agile",
+      "linux",
+      "java",
+      "aws",
+      "security",
+      "html",
+      "api"
+    ],
+    "common_seniority": "overqualified",
+    "experience_range": {
+      "min": 4.0,
+      "max": 8.0
+    }
+  }
+}
