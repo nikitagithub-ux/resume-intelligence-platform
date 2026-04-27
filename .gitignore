@@ -1,0 +1,7 @@
+data/dataset.csv 
+data/ideal_profiles.json 
+ml/model.pkl 
+temp/ 
+__pycache__/ 
+*.pyc 
+.env 
