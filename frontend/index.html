@@ -1145,8 +1145,9 @@ function renderResults(d) {
 
   // Profile comparison
   const pc = d.profile_comparison;
+  const domainLabel = DOMAIN_LABELS[d.job_domain] || d.job_domain;
   document.getElementById('profileMeta').textContent =
-    `Based on ${pc.based_on_n_candidates.toLocaleString()} successful ${d.job_domain} candidates`;
+    `Based on ${pc.based_on_n_candidates.toLocaleString()} candidates hired across all ${domainLabel} roles — not specific to this job title.`;
   setTimeout(() => {
     document.getElementById('profileSimFill').style.width = (pc.profile_similarity * 100) + '%';
   }, 300);
