@@ -92,6 +92,11 @@ def get_jobs():
             "id":     j["id"],
             "title":  j["title"],
             "domain": j["domain"],
+            "description":      j.get("description", ""),
+            "required_skills":  j.get("required_skills", []),
+            "nice_to_have":     j.get("nice_to_have", []),
+            "min_experience":   j.get("min_experience", 0),
+            "max_experience":   j.get("max_experience", 10),
         }
         for j in JOBS
     ]
